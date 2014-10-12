@@ -1,25 +1,32 @@
 Package.describe({
-    summary: "Make signin and signout their own pages with routes.",
-    name: "leesangwon:mira-accounts-entry",
-    version: "0.1.0"
+  summary: "Accounts-ui package, modified version of Accounts-entry package ",
+  version: "0.1.2",
+  git: "https://github.com/miraten/mira-accounts-entry"
 });
 
-Package.on_use(function(api) {
+Package.onUse(function(api) {
+  api.versionsFrom('METEOR@0.9.3.1');
 
-  // CLIENT
   api.use([
-    'deps',
-    'service-configuration',
     'accounts-base',
-    'underscore',
-    'templating',
-    'handlebars',
-    'session',
-    'sha']
-  , 'client');
+    'accounts-password',
+    'iron:router@0.9.4',
+    'leesangwon:mira-i18n@0.4.0'
+  ]);
+  
+  api.use([
+    'blaze',
+    'service-configuration',
+    'sha',
+    'spacebars',
+    'templating'    
+  ], 'client');
 
-
-  api.add_files([
+  api.addFiles([
+    'shared/router.js'
+  ]);
+  
+  api.addFiles([
     'client/entry.js',
     'client/helpers.js',
     'client/views/signIn/signIn.html',
@@ -40,41 +47,25 @@ Package.on_use(function(api) {
     'client/views/accountButtons/_wrapLinks.html',
     'client/views/accountButtons/signedIn.html',
     'client/views/accountButtons/accountButtons.js',
-    'client/views/verifyEmail/verifyEmail.js'
+    'client/views/verifyEmail/verifyEmail.js',
   ], 'client');
 
-  // SERVER
-  api.use([
-    'deps',
-    'service-configuration',
-    'accounts-password',
-    'accounts-base',
-    'underscore'
+  api.addFiles([
+    'server/entry.js'
   ], 'server');
-
-  api.add_files(['server/entry.js'], 'server');
-
-  // CLIENT and SERVER
-  api.imply('accounts-base', ['client', 'server']);
-  api.imply('accounts-password', ['client', 'server']);
-  api.use('iron:router@0.9.4', ['client', 'server']);
-  api.use('leesangwon:mira-i18n@0.4.0', ['client', 'server']);
   
-  api.add_files(['shared/router.js'], ['client', 'server']);
-
-  api.export('AccountsEntry', ['client', 'server']);
+  api.export('AccountsEntry');
 
 });
 
-Package.on_test(function (api) {
-  api.use(['tinytest',
-            'underscore',
-            'handlebars',
-            'test-helpers',
-            'templating',
-            'mongo-livedata',
-            'iron-router']);
+Package.onTest(function(api) {
+  api.use('tinytest');
   api.use('leesangwon:mira-accounts-entry');
-
-  api.add_files(['tests/route.js', 'tests/client.html', 'tests/client.js'], 'client');
-})
+  
+  api.addFiles([
+    'tests/route.js', 
+    'tests/client.html', 
+    'tests/client.js'
+  ], 'client');
+  
+});
