@@ -1,15 +1,8 @@
----
-layout: default
-username: Differential
-repo: accounts-entry
-desc: Meteor sign up and sign in pages.
-version: 0.8.0
+# mira-accounts-entry
 
----
+It is modified version of [Accounts-Entry package](https://atmospherejs.com/joshowens/accounts-entry).  
 
-**NOTE:** Version 0.8.0 and higher or accounts-entry requires that you use Meteor 0.8.2 or higher. You also need to pass the pause param to AccountsEntry.signedInRequired if you are using it. If you were using master and extraSignUpFields, please review the docs for changes in the 0.8.0 release.
 
-# accounts-entry
 
 [![Build Status](https://travis-ci.org/Differential/accounts-entry.png)](https://travis-ci.org/Differential/accounts-entry)
 
