@@ -38,10 +38,10 @@ AccountsEntry.entrySignInEvents = {
       Session.set('password', void 0);
       if (error) {
         return I18NHelper.accountsError(error);
-      } else if (Session.get('fromWhere')) {
+/*      } else if (Session.get('fromWhere')) {
         Router.go(Session.get('fromWhere'));
         return Session.set('fromWhere', void 0);
-      } else {
+*/      } else {
         return Router.go(AccountsEntry.settings.dashboardRoute);
       }
     });
