@@ -1,0 +1,20 @@
+<template name="entryAccountButtons">
+  {{#if currentUser}}
+    {{> signedInTemplate}}
+  {{else}}
+
+    {{#wrapLinksLi}}
+      <a href="/sign-in">{{{beforeSignIn}}}{{i18n "accounts.signIn"}}</a>
+    {{/wrapLinksLi}}
+
+    {{#unless wrapLinks}}
+      <span>or</span>
+    {{/unless}}
+
+    {{#if showCreateAccountLink}}
+      {{#wrapLinksLi}}
+        <a href="{{entrySignUp}}">{{{beforeSignUp}}}{{i18n "accounts.signUp"}}</a>
+      {{/wrapLinksLi}}
+    {{/if}}
+  {{/if}}
+</template>
