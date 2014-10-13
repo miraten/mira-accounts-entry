@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Accounts-ui package, modified version of Accounts-entry package ",
-  version: "0.1.5",
+  version: "0.2.0",
   git: "https://github.com/miraten/mira-accounts-entry"
 });
 
@@ -11,8 +11,9 @@ Package.onUse(function(api) {
     'accounts-base',
     'accounts-password',
     'iron:router@0.9.4',
-    'leesangwon:mira-i18n@0.4.0'
-  ]);
+    'leesangwon:mira-i18n@0.4.0',
+    'underscore'
+  ], ['client', 'server']);
   
   api.use([
     'blaze',
@@ -24,11 +25,12 @@ Package.onUse(function(api) {
 
   api.addFiles([
     'shared/router.js'
-  ]);
+  ], ['client', 'server']);
   
   api.addFiles([
     'client/entry.js',
     'client/helpers.js',
+    'client/views/banner/banner.html',
     'client/views/signIn/signIn.html',
     'client/views/signIn/signIn.js',
     'client/views/signUp/signUp.html',

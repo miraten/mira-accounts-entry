@@ -41,13 +41,22 @@ AccountsEntry.entrySignUpHelpers = {
   },
   emailAddress: function() {
     return Session.get('email');
+  },
+  termsOfUseLink: function() {
+    return '<a href="' + AccountsEntry.settings.termsUrl + '">' + I18n.get('accounts.label_terms_of_use') + '</a>'
+  },
+  privacyPolicyLink: function() {
+    return '<a href="' + AccountsEntry.settings.privacyUrl + '">' + I18n.get('accounts.label_privacy_policy') + '</a>'
   }
 };
 
 AccountsEntry.entrySignUpEvents = {
   'submit #signUp': function(event, t) {
-    var email, emailRequired, extraFields, fields, filteredExtraFields, formValues, password, passwordErrors, signupCode, trimInput, username, usernameRequired;
     event.preventDefault();
+
+    var email, emailRequired, fields, filteredExtraFields, password, passwordErrors, signupCode, trimInput, username, usernameRequired;
+    // var extraFields,formValues,
+
     username = t.find('input[name="username"]') ? t.find('input[name="username"]').value.toLowerCase() : void 0;
     if (username && AccountsEntry.settings.usernameToLower) {
       username = username.toLowerCase();
@@ -60,11 +69,12 @@ AccountsEntry.entrySignUpEvents = {
     if (AccountsEntry.settings.emailToLower && email) {
       email = email.toLowerCase();
     }
+    /*
     formValues = SimpleForm.processForm(event.target);
     extraFields = _.pluck(AccountsEntry.settings.extraSignUpFields, 'field');
     filteredExtraFields = _.pick(formValues, extraFields);
+    */
     password = t.find('input[type="password"]').value;
-    fields = AccountsEntry.settings.passwordSignupFields;
     passwordErrors = (function(password) {
       var errMsg, msg;
       errMsg = [];
@@ -91,6 +101,8 @@ AccountsEntry.entrySignUpEvents = {
     if (passwordErrors) {
       return;
     }
+
+    fields = AccountsEntry.settings.passwordSignupFields;
     emailRequired = _.contains(['USERNAME_AND_EMAIL', 'EMAIL_ONLY'], fields);
     usernameRequired = _.contains(['USERNAME_AND_EMAIL', 'USERNAME_ONLY'], fields);
     if (usernameRequired && username.length === 0) {
@@ -109,6 +121,7 @@ AccountsEntry.entrySignUpEvents = {
       Session.set('entryError', I18n.get("accounts.error.signupCodeRequired"));
       return;
     }
+
     return Meteor.call('entryValidateSignupCode', signupCode, function(err, valid) {
       var newUserData;
       if (valid) {
