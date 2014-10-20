@@ -27,80 +27,38 @@
               {{> entryError}}
               {{#if showUsername}}
               <section>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                  <input type="text" name="username" placeholder="{{i18n 'accounts.placeholderUsername'}}">
+                <label class="input input-icon-right"> <i class="icon-prepend fa fa-user"></i>
+                  <input autofocus type="text" name="username" placeholder="{{i18n 'accounts.placeholderUsername'}}"> <i></i>
                   <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipUsername'}}</b> </label>
               </section>
               {{/if}}
 
               <section>
-                <label class="input"> <i class="icon-append fa fa-envelope"></i>
-                  <input autofocus type="email" name="email" placeholder="{{i18n 'accounts.placeholderEmail'}}">
+                <label class="input"> <i class="icon-prepend fa fa-envelope"></i>
+                  <input type="email" name="email" placeholder="{{i18n 'accounts.placeholderEmail'}}"> <i></i>
                   <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipEmail'}}</b> </label>
               </section>
 
               <section>
-                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                <label class="input"> <i class="icon-prepend fa fa-lock"></i>
                   <input type="password" name="password" placeholder="{{i18n 'accounts.placeholderPassword'}}" id="password">
                   <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipPassword'}}</b> </label>
               </section>
             </fieldset>
 
             <fieldset>
-              <!-- div class="row">
-                <section class="col col-6">
-                  <label class="input">
-                    <input type="text" name="firstname" placeholder="First name">
-                  </label>
-                </section>
-                <section class="col col-6">
-                  <label class="input">
-                    <input type="text" name="lastname" placeholder="Last name">
-                  </label>
-                </section>
-              </div>
-
-              <div class="row">
-                <section class="col col-6">
-                  <label class="select">
-                    <select name="gender">
-                      <option value="0" selected="" disabled="">Gender</option>
-                      <option value="1">Male</option>
-                      <option value="2">Female</option>
-                      <option value="3">Prefer not to answer</option>
-                    </select> <i></i> </label>
-                </section>
-                <section class="col col-6">
-                  <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                    <input type="text" name="request" placeholder="Request activation on" class="datepicker" data-dateformat='dd/mm/yy'>
-                  </label>
-                </section>
-              </div -->
-
               <section>
-                <!-- label class="checkbox">
-                  <input type="checkbox" name="subscription" id="subscription">
-                  <i></i>I want to receive news and special offers</label>
                 <label class="checkbox">
-                  <input type="checkbox" name="terms" id="terms">
-                  <i></i>I agree with the <a href="#" data-toggle="modal" data-target="#myModal"> Terms and Conditions </a></label -->
-
-                <p class="entry-agreement">{{{i18n "accounts.text_agreement" 0=termsOfUseLink 1=privacyPolicyLink}}}</p>
-
+                  <input type="checkbox" name="agreements" id="agreements" value="1">
+                  <i></i>{{{i18n "accounts.text_agreement" 0=termsOfUseLink 1=privacyPolicyLink}}}</label>
               </section>
             </fieldset>
+
             <footer>
               <button type="submit" class="btn btn-primary">
                 {{i18n 'accounts.signUp'}}
               </button>
             </footer>
-
-            <div class="message">
-              <i class="fa fa-check"></i>
-              <p>
-                Thank you for your registration!
-              </p>
-            </div>
           </form>
 
         </div>
@@ -123,4 +81,62 @@
     </div>
   </div>
 </div>
+
+{{> entrySignUpModalTermsOfUse}}
+{{> entrySignUpModalPrivacyPolicy}}
+
+</template>
+
+<template name="entrySignUpModalTermsOfUse">
+<!-- Modal -->
+<div class="modal fade" id="modalTermsOfUse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{i18n 'accounts.label_terms_of_use'}}</h4>
+      </div>
+
+      <div class="modal-body custom-scroll terms-body">
+      {{> termsOfUse}}
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          {{i18n 'accounts.command_close'}}
+        </button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</template>
+
+<template name="entrySignUpModalPrivacyPolicy">
+  <!-- Modal -->
+  <div class="modal fade" id="modalPrivacyPolicy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel">{{i18n 'accounts.label_privacy_policy'}}</h4>
+        </div>
+
+        <div class="modal-body custom-scroll terms-body">
+          {{> privacyPolicy}}
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {{i18n 'accounts.command_close'}}
+          </button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
 </template>

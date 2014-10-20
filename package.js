@@ -1,6 +1,7 @@
 Package.describe({
+  name: "leesangwon:mira-accounts-entry",
   summary: "Accounts-ui package, modified version of Accounts-entry package ",
-  version: "0.2.0",
+  version: "0.4.0",
   git: "https://github.com/miraten/mira-accounts-entry"
 });
 
@@ -10,27 +11,27 @@ Package.onUse(function(api) {
   api.use([
     'accounts-base',
     'accounts-password',
+    'underscore',
     'iron:router@0.9.4',
     'leesangwon:mira-i18n@0.4.0',
-    'underscore'
+    'leesangwon:mira-validator@0.3.0'
   ], ['client', 'server']);
-  
+
   api.use([
     'blaze',
     'service-configuration',
     'sha',
     'spacebars',
-    'templating'    
+    'templating'
   ], 'client');
 
   api.addFiles([
     'shared/router.js'
   ], ['client', 'server']);
-  
+
   api.addFiles([
     'client/entry.js',
     'client/helpers.js',
-    'client/views/banner/banner.html',
     'client/views/signIn/signIn.html',
     'client/views/signIn/signIn.js',
     'client/views/signUp/signUp.html',
@@ -55,7 +56,7 @@ Package.onUse(function(api) {
   api.addFiles([
     'server/entry.js'
   ], 'server');
-  
+
   api.export('AccountsEntry');
 
 });
@@ -63,11 +64,11 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('leesangwon:mira-accounts-entry');
-  
+
   api.addFiles([
-    'tests/route.js', 
-    'tests/client.html', 
+    'tests/route.js',
+    'tests/client.html',
     'tests/client.js'
   ], 'client');
-  
+
 });

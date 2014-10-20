@@ -1,12 +1,12 @@
 AccountsEntry.entrySignInHelpers = {
-  emailInputType: function() {
+  subjectType: function() {
     if (AccountsEntry.settings.passwordSignupFields === 'EMAIL_ONLY') {
       return 'email';
     } else {
       return 'string';
     }
   },
-  emailPlaceholder: function() {
+  subject: function() {
     var fields;
     fields = AccountsEntry.settings.passwordSignupFields;
     if (_.contains(['USERNAME_AND_EMAIL', 'USERNAME_AND_OPTIONAL_EMAIL'], fields)) {

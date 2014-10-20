@@ -75,6 +75,11 @@ Router.map(function() {
         Template[this.template].events(AccountsEntry.entrySignUpEvents);
         return Template[this.template].helpers(AccountsEntry.entrySignUpHelpers);
       }
+    },
+    data: function() {
+      return {
+        timer: {}
+      };
     }
   });
   this.route("entryForgotPassword", {

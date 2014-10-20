@@ -9,33 +9,58 @@ AccountsEntry = {
   }
 };
 
-Meteor.methods({
-  entryValidateSignupCode: function(signupCode) {
-    check(signupCode, Match.OneOf(String, null, void 0));
-    return !AccountsEntry.settings.signupCode || signupCode === AccountsEntry.settings.signupCode;
-  },
-  entryCreateUser: function(user) {
-    var profile, userId;
-    check(user, Object);
-    profile = AccountsEntry.settings.defaultProfile || {};
+var validateAccount = function(attributes) {
 
-    if (user.username) {
-      userId = Accounts.createUser({
-        username: user.username,
-        email: user.email,
-        password: user.password,
-        profile: _.extend(profile, user.profile)
-      });
-    } else {
-      userId = Accounts.createUser({
-        email: user.email,
-        password: user.password,
-        profile: _.extend(profile, user.profile)
-      });
+  var validator = new AccountValidator();
+  validator.validateUsername(attributes.username);
+  validator.validateEmail(attributes.email);
+  validator.validatePassword(attributes.password);
+
+  if (validator.errors().length > 0) {
+    Logger.info('error: ' + validator.errorsToString());
+    throw new Match.Error(validator.errorsToString());
+  } else {
+    return true;
+  }
+};
+
+Meteor.methods({
+  entryCreateUser: function(attributes) {
+    try {
+      check(attributes, Match.Where(matchAccountNew));
+      check(attributes, Match.Where(matchAccountNewServer));
+    } catch (ex) {
+      Logger.info('error: ' + JSON.stringify(ex));
+      return new Meteor.Error('Match.Error', ex.message, JSON.stringify(ex.sanitizedError));
     }
-    if (user.email && Accounts._options.sendVerificationEmail) {
-      return Accounts.sendVerificationEmail(userId, user.email);
+
+    try {
+      var profile = AccountsEntry.settings.defaultProfile || {};
+
+      var userId = Accounts.createUser({
+        username: attributes.username,
+        email: attributes.email,
+        password: attributes.password,
+        profile: profile
+      });
+    } catch (ex) {
+      throw new Meteor.Error(ex.error, ex.reason, ex.message);
     }
+
+    if (Accounts._options.sendVerificationEmail) {
+      return Accounts.sendVerificationEmail(userId, attributes.email);
+    }
+  },
+
+  entryCheckUsername: function(attributes) {
+    check(attributes, { input: String });
+
+    var user = Meteor.users.findOne({ username: attributes.input });
+
+    if (user)
+      return false;
+    else
+      return true;
   }
 });
 
