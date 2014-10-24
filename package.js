@@ -1,7 +1,7 @@
 Package.describe({
   name: "leesangwon:mira-accounts-entry",
   summary: "Accounts-ui package, modified version of Accounts-entry package ",
-  version: "0.4.0",
+  version: "0.5.0",
   git: "https://github.com/miraten/mira-accounts-entry"
 });
 
@@ -50,9 +50,23 @@ Package.onUse(function(api) {
     'client/views/accountButtons/_wrapLinks.html',
     'client/views/accountButtons/signedIn.html',
     'client/views/accountButtons/accountButtons.js',
-    'client/views/verifyEmail/verifyEmail.js',
+    'client/views/verifyEmail/verifyEmail.js'
   ], 'client');
 
+  api.addFiles([
+    'client/accounts-ui/accounts_ui.js',
+    'client/accounts-ui/login_buttons.html',
+    'client/accounts-ui/login_buttons_single.html',
+    'client/accounts-ui/login_buttons_dropdown.html',
+    'client/accounts-ui/login_buttons_dialogs.html',
+    'client/accounts-ui/login_buttons_session.js',
+    'client/accounts-ui/login_buttons.js',
+    'client/accounts-ui/login_buttons_single.js',
+    'client/accounts-ui/login_buttons_dropdown.js',
+    'client/accounts-ui/login_buttons_dialogs.js'
+  ], 'client');
+
+  
   api.addFiles([
     'server/entry.js'
   ], 'server');
@@ -70,5 +84,7 @@ Package.onTest(function(api) {
     'tests/client.html',
     'tests/client.js'
   ], 'client');
+
+  api.addFiles('client/accounts-ui/accounts_ui_tests.js', 'client');
 
 });
