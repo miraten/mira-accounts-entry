@@ -69,11 +69,21 @@
 
 <template name="_justVerifiedEmailDialog">
   {{#if visible}}
-    <div class="accounts-dialog accounts-centered-dialog">
-      Email verified.
-      You are now logged in as {{displayName}}.
-      <div class="login-button" id="just-verified-dismiss-button">Dismiss</div>
-    </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{i18n 'accounts.title_email_verified'}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          {{i18n 'accounts.text_email_verified' 0=displayName}}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button id="just-verified-dismiss-button" type="button" class="btn btn-default" data-dismiss="modal">{{i18n 'accounts.command_close'}}</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
   {{/if}}
 </template>
 

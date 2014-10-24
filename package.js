@@ -1,12 +1,29 @@
 Package.describe({
   name: "leesangwon:mira-accounts-entry",
   summary: "Accounts-ui package, modified version of Accounts-entry package ",
-  version: "0.5.1",
+  version: "0.5.4",
   git: "https://github.com/miraten/mira-accounts-entry"
 });
 
 Package.onUse(function(api) {
   api.versionsFrom('METEOR@0.9.3.1');
+
+  // accounts-ui packages embed
+  api.addFiles([
+    'client/accounts-ui/accounts_ui.js',
+    'client/accounts-ui/login_buttons.html',
+    'client/accounts-ui/login_buttons_single.html',
+    'client/accounts-ui/login_buttons_dropdown.html',
+    'client/accounts-ui/login_buttons_dialogs.html',
+    'client/accounts-ui/login_buttons_session.js',
+    'client/accounts-ui/login_buttons.js',
+    'client/accounts-ui/login_buttons_single.js',
+    'client/accounts-ui/login_buttons_dropdown.js',
+    'client/accounts-ui/login_buttons_dialogs.js'
+  ], 'client');
+
+  // Export Accounts (etc) to packages using this one.
+  api.imply('accounts-base', ['client', 'server']);
 
   api.use([
     'accounts-base',
@@ -52,29 +69,12 @@ Package.onUse(function(api) {
     'client/views/accountButtons/accountButtons.js',
     'client/views/verifyEmail/verifyEmail.js'
   ], 'client');
-
-  api.addFiles([
-    'client/accounts-ui/accounts_ui.js',
-    'client/accounts-ui/login_buttons.html',
-    'client/accounts-ui/login_buttons_single.html',
-    'client/accounts-ui/login_buttons_dropdown.html',
-    'client/accounts-ui/login_buttons_dialogs.html',
-    'client/accounts-ui/login_buttons_session.js',
-    'client/accounts-ui/login_buttons.js',
-    'client/accounts-ui/login_buttons_single.js',
-    'client/accounts-ui/login_buttons_dropdown.js',
-    'client/accounts-ui/login_buttons_dialogs.js'
-  ], 'client');
-
   
   api.addFiles([
     'server/entry.js'
   ], 'server');
 
   api.export('AccountsEntry');
-  
-  // Export Accounts (etc) to packages using this one.
-  api.imply('accounts-base', ['client', 'server']);
 
 });
 
