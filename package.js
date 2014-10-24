@@ -1,7 +1,7 @@
 Package.describe({
   name: "leesangwon:mira-accounts-entry",
   summary: "Accounts-ui package, modified version of Accounts-entry package ",
-  version: "0.5.0",
+  version: "0.5.1",
   git: "https://github.com/miraten/mira-accounts-entry"
 });
 
@@ -72,6 +72,9 @@ Package.onUse(function(api) {
   ], 'server');
 
   api.export('AccountsEntry');
+  
+  // Export Accounts (etc) to packages using this one.
+  api.imply('accounts-base', ['client', 'server']);
 
 });
 
