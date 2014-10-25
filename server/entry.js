@@ -8,7 +8,7 @@ AccountsEntry = {
     return this.settings = _.extend(this.settings, appConfig);
   }
 };
-
+/*
 var validateAccount = function(attributes) {
 
   var validator = new AccountValidator();
@@ -23,6 +23,7 @@ var validateAccount = function(attributes) {
     return true;
   }
 };
+*/
 
 var sendVerificationEmail = function(userId, address) {
   // XXX Also generate a link using which someone can delete this

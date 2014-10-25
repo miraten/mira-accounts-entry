@@ -34,8 +34,16 @@ AccountsEntry.entrySignInEvents = {
     }
     Session.set('email', email);
     Session.set('password', $('input[name="password"]').val());
+
+    // spin
+    var spinner = new Spinner().spin();
+    document.body.appendChild(spinner.el);
+
     return Meteor.loginWithPassword(Session.get('email'), Session.get('password'), function(error) {
       Session.set('password', void 0);
+
+      spinner.stop();
+
       if (error) {
         return I18NHelper.accountsError(error);
 /*      } else if (Session.get('fromWhere')) {

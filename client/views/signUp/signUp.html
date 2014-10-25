@@ -29,20 +29,26 @@
               <section>
                 <label class="input input-icon-right"> <i class="icon-prepend fa fa-user"></i>
                   <input autofocus type="text" name="username" placeholder="{{i18n 'accounts.placeholderUsername'}}"> <i></i>
-                  <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipUsername'}}</b> </label>
+                  <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipUsername'}}</b>
+                </label>
+                <div class="note note-error"></div>
               </section>
               {{/if}}
 
               <section>
                 <label class="input"> <i class="icon-prepend fa fa-envelope"></i>
                   <input type="email" name="email" placeholder="{{i18n 'accounts.placeholderEmail'}}"> <i></i>
-                  <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipEmail'}}</b> </label>
+                  <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipEmail'}}</b>
+                </label>
+                <div class="note note-error"></div>
               </section>
 
               <section>
                 <label class="input"> <i class="icon-prepend fa fa-lock"></i>
                   <input type="password" name="password" placeholder="{{i18n 'accounts.placeholderPassword'}}" id="password">
-                  <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipPassword'}}</b> </label>
+                  <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipPassword'}}</b>
+                </label>
+                <div class="note note-error"></div>
               </section>
             </fieldset>
 

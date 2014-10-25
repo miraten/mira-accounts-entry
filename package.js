@@ -1,7 +1,7 @@
 Package.describe({
   name: "leesangwon:mira-accounts-entry",
   summary: "Accounts-ui package, modified version of Accounts-entry package ",
-  version: "0.6.2",
+  version: "0.7.0",
   git: "https://github.com/miraten/mira-accounts-entry"
 });
 
@@ -39,7 +39,8 @@ Package.onUse(function(api) {
     'service-configuration',
     'sha',
     'spacebars',
-    'templating'
+    'templating',
+    'sacha:spin@2.0.4'
   ], 'client');
 
   api.use(['email'], 'server');

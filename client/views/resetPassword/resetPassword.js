@@ -14,37 +14,28 @@
       password = $('input[name="password"]').val();
       passwordConfirm = $('input[name="password-confirm"]').val();
 
-      passwordErrors = (function(password, passwordConfirm) {
-        var errMsg, msg;
-        errMsg = [];
-        msg = false;
-        if (password === passwordConfirm) {
-          if (password.length < 7) {
-            errMsg.push(I18n.get("accounts.error.minChar"));
-          }
-          if (password.search(/[a-z]/i) < 0) {
-            errMsg.push(I18n.get("accounts.error.pwOneLetter"));
-          }
-          if (password.search(/[0-9]/) < 0) {
-            errMsg.push(I18n.get("accounts.error.pwOneDigit"));
-          }
-        } else {
-          errMsg.push(I18n.get("accounts.error.passwordConfirmFail"));
-        }
-
-        if (errMsg.length > 0) {
-          msg = "";
-          errMsg.forEach(function(e) {
-            return msg = msg.concat("" + e + "\r\n");
-          });
-          Session.set('entryError', msg);
-          return true;
-        }
-        return false;
-      })(password, passwordConfirm);
-      if (passwordErrors) {
+      // validation
+      if (! password) {
+        Session.set('entryError', I18n.get('error_out_of_range'));
         return;
       }
+      if (password && password !== passwordConfirm) {
+        Session.set('entryError', I18n.get('accounts.error.password_confirm_fail'));
+        return;
+      }
+      var response = AccountsEntry.settings.validator.resetPassword(password);
+      if (response.errors().length > 0) {
+        _.each(response.errors(), function(error) {
+          var translated = "";
+          _.each(error.messages, function(message) {
+            translated += I18n.get(message);
+          });
+          Session.set('entryError', translated);
+        });
+
+        return;
+      }
+
       return Accounts.resetPassword(Session.get('resetToken'), password, function(error) {
         if (error) {
           return Session.set('entryError', error.reason || "Unknown error");

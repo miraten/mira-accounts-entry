@@ -103,22 +103,61 @@ AccountsEntry.entrySignUpEvents = {
       email: $(e.target).find('[name=email]').val(),
       password: $(e.target).find('[name=password]').val()
     };
-/*
+
     // validation
-    var response = accountNewValidate(attributes);
+    var response = AccountsEntry.settings.validator.signUp(attributes);
     if (response.errors().length > 0) {
+      $('input').parent().removeClass('status-error');
+
+      _.each(response.errors(), function(error) {
+        switch (error.attribute) {
+          case 'username':
+            var translated = "";
+            _.each(error.messages, function(message) {
+              translated += I18n.get(message);
+            });
+            var element = $(e.target).find('[name=username]').parent();
+            element.addClass('state-error');
+            element.next().html(translated);
+            break;
+          case 'email':
+            var translated = "";
+            _.each(error.messages, function(message) {
+              translated += I18n.get(message);
+            });
+            var element = $(e.target).find('[name=email]').parent();
+            element.addClass('state-error');
+            element.next().html(translated);
+            break;
+          case 'password':
+            var translated = "";
+            _.each(error.messages, function(message) {
+              translated += I18n.get(message);
+            });
+            var element = $(e.target).find('[name=password]').parent();
+            element.addClass('state-error');
+            element.next().html(translated);
+            break;
+          default:
+        }
+      });
+
       return;
     }
-*/
+
+    // spin
+    var spinner = new Spinner().spin();
+    document.body.appendChild(spinner.el);
+
     Meteor.call('entryCreateUser', attributes, function(error, result) {
       if (error) {
         console.log('client error: ' + JSON.stringify(error));
 
         I18NHelper.accountsError(error);
+
+        spinner.stop();
         return;
       }
-
-      console.log('result: ' + JSON.stringify(result));
 
       var isEmailSignUp, userCredential;
 
@@ -132,6 +171,7 @@ AccountsEntry.entrySignUpEvents = {
             Router.go(AccountsEntry.settings.homeRoute);
           }
         });
+        spinner.stop();
         return;
       } else {
         isEmailSignUp = _.contains(['USERNAME_AND_EMAIL', 'EMAIL_ONLY'], AccountsEntry.settings.passwordSignupFields);
@@ -169,6 +209,7 @@ AccountsEntry.entrySignUpEvents = {
               //return Router.go(AccountsEntry.settings.dashboardRoute);
             }
           }
+          spinner.stop();
         });
       }
 
