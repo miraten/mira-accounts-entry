@@ -1,7 +1,7 @@
 Package.describe({
   name: "leesangwon:mira-accounts-entry",
   summary: "Accounts-ui package, modified version of Accounts-entry package ",
-  version: "0.5.4",
+  version: "0.6.2",
   git: "https://github.com/miraten/mira-accounts-entry"
 });
 
@@ -42,6 +42,8 @@ Package.onUse(function(api) {
     'templating'
   ], 'client');
 
+  api.use(['email'], 'server');
+
   api.addFiles([
     'shared/router.js'
   ], ['client', 'server']);
@@ -67,7 +69,7 @@ Package.onUse(function(api) {
     'client/views/accountButtons/_wrapLinks.html',
     'client/views/accountButtons/signedIn.html',
     'client/views/accountButtons/accountButtons.js',
-    'client/views/verifyEmail/verifyEmail.js'
+    'client/views/verifyEmail/verifyEmail.html'
   ], 'client');
   
   api.addFiles([

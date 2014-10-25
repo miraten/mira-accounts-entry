@@ -110,7 +110,7 @@ Router.map(function() {
       return pause();
     }
   });
-  return this.route('entryResetPassword', {
+  this.route('entryResetPassword', {
     path: 'reset-password/:resetToken',
     layoutTemplate: "layoutEntry",
     onBeforeAction: function() {
@@ -118,6 +118,25 @@ Router.map(function() {
 
       Session.set('entryError', void 0);
       return Session.set('resetToken', this.params.resetToken);
+    },
+    onStop: function() {
+      resetCustomStyle();
+    }
+  });
+  return this.route('entryVerifyEmail', {
+    path: 'verify-email/:verifyEmailToken',
+    layoutTemplate: "layoutEntry",
+    onBeforeAction: function() {
+      setCustomStyle();
+
+      Accounts.verifyEmail(this.params.verifyEmailToken, function(error) {
+        if (error) {
+          Session.set('entryError', error.reason);
+        } else {
+          console.log('Email verified');
+          Accounts._enableAutoLogin();
+        }
+      });
     },
     onStop: function() {
       resetCustomStyle();
