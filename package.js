@@ -1,7 +1,7 @@
 Package.describe({
   name: "leesangwon:mira-accounts-entry",
   summary: "Accounts-ui package, modified version of Accounts-entry package ",
-  version: "0.7.0",
+  version: "0.7.7",
   git: "https://github.com/miraten/mira-accounts-entry"
 });
 

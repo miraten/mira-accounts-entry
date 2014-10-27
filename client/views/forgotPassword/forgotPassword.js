@@ -12,12 +12,20 @@
       event.preventDefault();
       Session.set('email', $('input[name="forgottenEmail"]').val());
       if (Session.get('email').length === 0) {
-        Session.set('entryError', 'Email is required');
+        Session.set('entryError', I18n.get('accounts.error_email_required'));
         return;
       }
+      
+      // spin
+      var spinner = new Spinner().spin();
+      document.body.appendChild(spinner.el);
+  
       return Accounts.forgotPassword({
         email: Session.get('email')
       }, function(error) {
+        
+        spinner.stop();
+        
         if (error) {
           return Session.set('entryError', error.reason);
         } else {
