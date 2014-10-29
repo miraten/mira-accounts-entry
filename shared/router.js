@@ -37,7 +37,6 @@ Router.map(function() {
         if (userRendered) {
           Template[this.template].rendered = function() {
             pkgRendered.call(this);
-            this.next();
             return userRendered.call(this);
           };
         } else {
@@ -71,7 +70,6 @@ Router.map(function() {
         if (userRendered) {
           Template[this.template].rendered = function() {
             pkgRendered.call(this);
-            this.next();
             return userRendered.call(this);
           };
         } else {
@@ -109,12 +107,12 @@ Router.map(function() {
       if (AccountsEntry.settings.homeRoute) {
         if (Meteor.userId())
           Meteor.logout(function() {
-            this.next();
             return Router.go(AccountsEntry.settings.homeRoute);
           });
         else
           Router.go(AccountsEntry.settings.homeRoute);
       }
+      this.next();
     }
   });
   this.route('entryResetPassword', {
