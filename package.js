@@ -1,7 +1,7 @@
 Package.describe({
   name: "leesangwon:mira-accounts-entry",
   summary: "Accounts-ui package, modified version of Accounts-entry package ",
-  version: "0.7.7",
+  version: "0.7.9",
   git: "https://github.com/miraten/mira-accounts-entry"
 });
 
@@ -29,7 +29,7 @@ Package.onUse(function(api) {
     'accounts-base',
     'accounts-password',
     'underscore',
-    'iron:router@0.9.4',
+    'iron:router@1.0.0',
     'leesangwon:mira-i18n@0.4.0',
     'leesangwon:mira-validator@0.3.0'
   ], ['client', 'server']);

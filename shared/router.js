@@ -18,6 +18,7 @@ Router.map(function() {
 
       Session.set('entryError', void 0);
       Session.set('buttonText', 'in');
+      this.next();
       return Session.set('fromWhere', Router.current().path);
     },
     onStop: function() {
@@ -36,12 +37,14 @@ Router.map(function() {
         if (userRendered) {
           Template[this.template].rendered = function() {
             pkgRendered.call(this);
+            this.next();
             return userRendered.call(this);
           };
         } else {
           Template[this.template].rendered = pkgRendered;
         }
         Template[this.template].events(AccountsEntry.entrySignInEvents);
+        this.next();
         return Template[this.template].helpers(AccountsEntry.entrySignInHelpers);
       }
     }
@@ -53,6 +56,7 @@ Router.map(function() {
     onBeforeAction: function() {
       setCustomStyle();
       Session.set('entryError', void 0);
+      this.next();
       return Session.set('buttonText', 'up');
     },
     onStop: function() {
@@ -67,12 +71,14 @@ Router.map(function() {
         if (userRendered) {
           Template[this.template].rendered = function() {
             pkgRendered.call(this);
+            this.next();
             return userRendered.call(this);
           };
         } else {
           Template[this.template].rendered = pkgRendered;
         }
         Template[this.template].events(AccountsEntry.entrySignUpEvents);
+        this.next();
         return Template[this.template].helpers(AccountsEntry.entrySignUpHelpers);
       }
     },
@@ -89,6 +95,7 @@ Router.map(function() {
       setCustomStyle();
       $('body').addClass('animated');
       $('body').addClass('fadeInDown');
+      this.next();
       return Session.set('entryError', void 0);
     },
     onStop: function() {
@@ -97,17 +104,17 @@ Router.map(function() {
   });
   this.route('entrySignOut', {
     path: '/sign-out',
-    onBeforeAction: function(pause) {
+    onBeforeAction: function() {
       Session.set('entryError', void 0);
       if (AccountsEntry.settings.homeRoute) {
         if (Meteor.userId())
           Meteor.logout(function() {
+            this.next();
             return Router.go(AccountsEntry.settings.homeRoute);
           });
         else
           Router.go(AccountsEntry.settings.homeRoute);
       }
-      return pause();
     }
   });
   this.route('entryResetPassword', {
@@ -117,6 +124,7 @@ Router.map(function() {
       setCustomStyle();
 
       Session.set('entryError', void 0);
+      this.next();
       return Session.set('resetToken', this.params.resetToken);
     },
     onStop: function() {
@@ -137,6 +145,7 @@ Router.map(function() {
           Accounts._enableAutoLogin();
         }
       });
+      this.next();
     },
     onStop: function() {
       resetCustomStyle();
