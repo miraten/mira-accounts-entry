@@ -8,7 +8,8 @@ AccountsEntry = {
     usernameToLower: false,
     entrySignUp: '/sign-up',
     extraSignUpFields: [],
-    showOtherLoginServices: true
+    showOtherLoginServices: true,
+    layoutTemplate: 'layoutEntry'
   },
 
   isStringEmail: function(email) {

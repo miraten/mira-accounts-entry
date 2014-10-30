@@ -9,7 +9,6 @@ var resetCustomStyle = function() {
 Router.map(function() {
   this.route("entrySignIn", {
     path: "/sign-in",
-    layoutTemplate: "layoutEntry",
     onBeforeAction: function() {
       setCustomStyle();
 
@@ -18,8 +17,8 @@ Router.map(function() {
 
       Session.set('entryError', void 0);
       Session.set('buttonText', 'in');
+      Session.set('fromWhere', Router.current().path);
       this.next();
-      return Session.set('fromWhere', Router.current().path);
     },
     onStop: function() {
       resetCustomStyle();
@@ -30,6 +29,7 @@ Router.map(function() {
       if (Meteor.userId()) {
         Router.go(AccountsEntry.settings.dashboardRoute);
       }
+      
       if (AccountsEntry.settings.signInTemplate) {
         this.template = AccountsEntry.settings.signInTemplate;
         pkgRendered = Template.entrySignIn.rendered;
@@ -43,20 +43,19 @@ Router.map(function() {
           Template[this.template].rendered = pkgRendered;
         }
         Template[this.template].events(AccountsEntry.entrySignInEvents);
-        this.next();
-        return Template[this.template].helpers(AccountsEntry.entrySignInHelpers);
+        Template[this.template].helpers(AccountsEntry.entrySignInHelpers);
       }
+      this.next();
     }
   });
 
   this.route("entrySignUp", {
     path: "/sign-up",
-    layoutTemplate: "layoutEntry",
     onBeforeAction: function() {
       setCustomStyle();
       Session.set('entryError', void 0);
+      Session.set('buttonText', 'up');
       this.next();
-      return Session.set('buttonText', 'up');
     },
     onStop: function() {
       resetCustomStyle();
@@ -76,9 +75,9 @@ Router.map(function() {
           Template[this.template].rendered = pkgRendered;
         }
         Template[this.template].events(AccountsEntry.entrySignUpEvents);
-        this.next();
-        return Template[this.template].helpers(AccountsEntry.entrySignUpHelpers);
+        Template[this.template].helpers(AccountsEntry.entrySignUpHelpers);
       }
+      this.next();
     },
     data: function() {
       return {
@@ -88,18 +87,18 @@ Router.map(function() {
   });
   this.route("entryForgotPassword", {
     path: "/forgot-password",
-    layoutTemplate: "layoutEntry",
     onBeforeAction: function() {
       setCustomStyle();
       $('body').addClass('animated');
       $('body').addClass('fadeInDown');
+      Session.set('entryError', void 0);
       this.next();
-      return Session.set('entryError', void 0);
     },
     onStop: function() {
       resetCustomStyle();
     }
   });
+  /*
   this.route('entrySignOut', {
     path: '/sign-out',
     onBeforeAction: function() {
@@ -115,15 +114,15 @@ Router.map(function() {
       this.next();
     }
   });
+  */
   this.route('entryResetPassword', {
     path: 'reset-password/:resetToken',
-    layoutTemplate: "layoutEntry",
     onBeforeAction: function() {
       setCustomStyle();
 
       Session.set('entryError', void 0);
+      Session.set('resetToken', this.params.resetToken);
       this.next();
-      return Session.set('resetToken', this.params.resetToken);
     },
     onStop: function() {
       resetCustomStyle();
@@ -131,7 +130,6 @@ Router.map(function() {
   });
   return this.route('entryVerifyEmail', {
     path: 'verify-email/:verifyEmailToken',
-    layoutTemplate: "layoutEntry",
     onBeforeAction: function() {
       setCustomStyle();
 

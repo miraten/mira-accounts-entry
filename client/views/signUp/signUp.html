@@ -1,16 +1,7 @@
 <template name='entrySignUp'>
   {{pageTitle i18n='accounts.signUp'}}
-<header id="header">
-  {{> accountsLogo}}
-  <span id="extr-page-header-space"> <span class="hidden-mobile">{{i18n "accounts.ifYouAlreadyHaveAnAccount"}}</span> <a href="{{pathFor 'entrySignIn'}}" class="btn btn-danger">{{i18n "accounts.signIn"}}</a> </span>
-
-</header>
-
-<div id="main" role="main">
-
-  <!-- MAIN CONTENT -->
+  
   <div id="content" class="container">
-
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 hidden-xs hidden-sm">
         {{> accountsEntryBanner}}
@@ -86,7 +77,6 @@
       </div>
     </div>
   </div>
-</div>
 
 {{> entrySignUpModalTermsOfUse}}
 {{> entrySignUpModalPrivacyPolicy}}

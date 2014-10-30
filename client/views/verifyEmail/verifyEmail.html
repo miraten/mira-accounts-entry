@@ -1,21 +1,14 @@
 <template name="entryVerifyEmail">
   {{pageTitle i18n='accounts.title_email_verified'}}
-  <header id="header">
-    {{> accountsLogo}}
-  </header>
-
-  <div id="main" role="main">
-
-    <div id="content" class="container">
-      <div class="alert alert-info alert-block">
+  
+  <div id="content" class="container">
+    <div class="alert alert-info alert-block">
       <h4 class="alert-heading">{{i18n 'accounts.title_email_verified'}}</h4>
       {{i18n 'accounts.text_email_verified'}}
       <p class="text-align-left">
-      <br>
-      <a href="{{pathFor 'home'}}" class="btn btn-sm btn-default">{{i18n 'accounts.command_home'}}</a>
+        <br>
+        <a href="{{pathFor 'home'}}" class="btn btn-sm btn-default">{{i18n 'accounts.command_home'}}</a>
       </p>
-      </div>
     </div>
-
   </div>
 </template>

@@ -1,12 +1,12 @@
 Package.describe({
   name: "leesangwon:mira-accounts-entry",
   summary: "Accounts-ui package, modified version of Accounts-entry package ",
-  version: "0.8.0",
+  version: "0.8.7",
   git: "https://github.com/miraten/mira-accounts-entry"
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('METEOR@0.9.3.1');
+  api.versionsFrom('METEOR@1.0');
 
   // accounts-ui packages embed
   api.addFiles([
