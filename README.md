@@ -1,3 +1,10 @@
+# deprecated
+
+It is deprecated.
+
+Use [leesangwon:accounts-ui](https://github.com/miraten/meteor-accounts-ui).
+
+
 # mira-accounts-entry
 
 It is modified version of [Accounts-Entry package](https://atmospherejs.com/joshowens/accounts-entry).  
